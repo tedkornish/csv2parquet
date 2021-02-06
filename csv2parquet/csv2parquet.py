@@ -21,6 +21,8 @@ PA_BINARY = pa.binary()
 def get_delimiter(csv_file):
     if csv_file[-4:] == '.tsv':
         return '\t'
+    elif csv_file[-4:] == '.psv':
+        return '|'
     return ','
 
 def sanitize_column_name(name):
@@ -204,7 +206,7 @@ def main_with_args(func, argv):
     output = args.output
     if output is None:
         output = args.csv_file
-        output = re.sub(r'\.tsv$|\.csv$', '', output)
+        output = re.sub(r'\.tsv$|\.csv$|\.psv$', '', output)
         output = output + '.parquet'
     else:
         output = output[0]
